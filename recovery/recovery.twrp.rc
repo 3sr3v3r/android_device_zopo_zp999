@@ -1,5 +1,3 @@
-import /init.recovery.mt6595.rc
-
 on early-init
     # Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
     write /sys/fs/selinux/checkreqprot 0
@@ -16,15 +14,29 @@ service set_permissive /sbin/toolbox setenforce 0
     seclabel u:r:recovery:s0
 
 on init
-    export PATH /sbin:/system/bin
+    export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH .:/sbin
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
 
+# Backward compatibility
+    symlink /system/etc /etc
+
+# Change ION driver permission
+    chmod 0644 /dev/ion
+
+# Change MMP driver permission
+    chmod 0644 /dev/mmp
+
+# change lk_env permission
+    chown root system /proc/lk_env
+    chmod 0660 /proc/lk_env
+    
     mkdir /boot
     mkdir /recovery
     mkdir /sdcard
+    mkdir /emmc
     mkdir /external_sd
     mkdir /usbotg
     mkdir /sideload
@@ -45,9 +57,9 @@ on fs
 
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0C02
+    write /sys/class/android_usb/android0/idProduct 0C03
     write /sys/class/android_usb/android0/f_ffs/aliases adb
-    write /sys/class/android_usb/android0/functions mtp,adb
+    write /sys/class/android_usb/android0/functions mass_storage,adb
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}

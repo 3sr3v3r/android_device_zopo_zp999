@@ -30,14 +30,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-  
-# Ramdisk
-PRODUCT_PACKAGES += \
-    fstab.mt6595 \
-    init.mt6595.rc \
-    init.mt6595.usb.rc \
-    init.protect.rc
-
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_COPY_FILES_OVERRIDES += \
     root/fstab.goldfish \
