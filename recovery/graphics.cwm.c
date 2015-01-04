@@ -12,6 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * - this is a file created by Carliv from forum.xda-developers.com, by modifying 
+ *  the stock cwm recovery file, in order to support the mt6596 platforms 32 bits
+ *  framebuffer.
  */
 
 #include <stdbool.h>
