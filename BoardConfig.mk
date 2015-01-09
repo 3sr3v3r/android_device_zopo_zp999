@@ -32,16 +32,23 @@ TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a7
+TARGET_ARCH_VARIANT_CPU := cortex-a7
+TARGET_CPU_VARIANT:= cortex-a7
 # Second Architecture
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT_CPU := cortex-a17
 TARGET_2ND_CPU_VARIANT := cortex-a17
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 
+ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HAVE_VFP := true
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
@@ -61,8 +68,8 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Recovery
-RECOVERY_VARIANT := cwm
-#RECOVERY_VARIANT := carliv
+#RECOVERY_VARIANT := cwm
+RECOVERY_VARIANT := carliv
 #RECOVERY_VARIANT := philz
 #RECOVERY_VARIANT := cm
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel

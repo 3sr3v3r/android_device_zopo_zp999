@@ -20,18 +20,8 @@ on init
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
 
-# Backward compatibility
     symlink /system/etc /etc
-
-# Change ION driver permission
-    chmod 0644 /dev/ion
-
-# Change MMP driver permission
-    chmod 0644 /dev/mmp
-
-# change lk_env permission
-    chown root system /proc/lk_env
-    chmod 0660 /proc/lk_env
+    symlink /data/media/0 /sdcard
     
     mkdir /boot
     mkdir /recovery
