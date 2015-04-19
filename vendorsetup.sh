@@ -21,3 +21,4 @@
 # function: add_lunch_combo generic-eng
 
 add_lunch_combo cm_zp999-eng
+add_lunch_combo cm_zp999-userdebug

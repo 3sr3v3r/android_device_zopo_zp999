@@ -301,14 +301,14 @@ void gr_blit(gr_surface source, int sx, int sy, int w, int h, int dx, int dy) {
     gl->recti(gl, dx, dy, dx + w, dy + h);
 }
 
-unsigned int gr_get_width(gr_surface surface) {
+int gr_get_width(gr_surface surface) {
     if (surface == NULL) {
         return 0;
     }
     return ((GGLSurface*) surface)->width;
 }
 
-unsigned int gr_get_height(gr_surface surface) {
+int gr_get_height(gr_surface surface) {
     if (surface == NULL) {
         return 0;
     }

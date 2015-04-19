@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 $(call inherit-product-if-exists, vendor/zopo/zp999/zp999-vendor.mk)
 
@@ -31,10 +34,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+PRODUCT_NAME := full_zp999
+PRODUCT_DEVICE := zp999
 PRODUCT_COPY_FILES_OVERRIDES += \
-    root/fstab.goldfish \
-    root/init.goldfish.rc \
-    recovery/root/fstab.goldfish 
+    recovery/root/file_contexts \
+    recovery/root/property_contexts \
+    recovery/root/seapp_contexts \
+    recovery/root/sepolicy \
+    recovery/root/ueventd.rc 
 
 # Set insecure for root access and device specifics
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0 \
@@ -47,5 +54,3 @@ persist.sys.usb.config=mtp \
 ro.mount.fs=EXT4 \
 ro.persist.partition.support=no \
 ro.cip.partition.support=no
-   
-$(call inherit-product, build/target/product/full.mk)

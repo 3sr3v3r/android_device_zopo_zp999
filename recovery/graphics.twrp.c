@@ -39,7 +39,7 @@
 #ifdef BOARD_USE_CUSTOM_RECOVERY_FONT
 #include BOARD_USE_CUSTOM_RECOVERY_FONT
 #else
-#include "roboto_23x41.h"
+#include "font27_16x33.h"
 #endif
 
 #define PIXEL_FORMAT GGL_PIXEL_FORMAT_RGBA_8888
@@ -210,28 +210,7 @@ static int get_framebuffer(GGLSurface *fb)
         vi.green.length   = 8;
         vi.blue.offset    = 16;
         vi.blue.length    = 8;
-    } else if (PIXEL_FORMAT == GGL_PIXEL_FORMAT_RGB_565) {
-#ifdef RECOVERY_RGB_565
-		fprintf(stderr, "Pixel format: RGB_565\n");
-		vi.blue.offset    = 0;
-		vi.green.offset   = 5;
-		vi.red.offset     = 11;
-#else
-        fprintf(stderr, "Pixel format: BGR_565\n");
-		vi.blue.offset    = 11;
-		vi.green.offset   = 5;
-		vi.red.offset     = 0;
-#endif
-		if (PIXEL_SIZE != 2)    fprintf(stderr, "E: Pixel Size mismatch!\n");
-		vi.blue.length    = 5;
-		vi.green.length   = 6;
-		vi.red.length     = 5;
-        vi.blue.msb_right = 0;
-        vi.green.msb_right = 0;
-        vi.red.msb_right = 0;
-        vi.transp.offset  = 0;
-        vi.transp.length  = 0;
-    }
+    } 
     else
     {
         perror("unknown pixel format");
@@ -282,12 +261,7 @@ static int get_framebuffer(GGLSurface *fb)
     fb->version = sizeof(*fb);
     fb->width = vi.xres;
     fb->height = vi.yres;
-#ifdef BOARD_HAS_JANKY_BACKBUFFER
-    printf("setting JANKY BACKBUFFER\n");
-    fb->stride = fi.line_length/2;
-#else
     fb->stride = vi.xres_virtual;
-#endif
     fb->format = PIXEL_FORMAT;
     if (!has_overlay) {
         fb->data = bits;
@@ -305,13 +279,8 @@ static int get_framebuffer(GGLSurface *fb)
     fb->version = sizeof(*fb);
     fb->width = vi.xres;
     fb->height = vi.yres;
-#ifdef BOARD_HAS_JANKY_BACKBUFFER
-    fb->stride = fi.line_length/2;
-    fb->data = (GGLubyte*) (((unsigned long) bits) + vi.yres * fi.line_length);
-#else
     fb->stride = vi.xres_virtual;
     fb->data = (GGLubyte*) (((unsigned long) bits) + vi.yres * fb->stride * PIXEL_SIZE);
-#endif
     fb->format = PIXEL_FORMAT;
     if (!has_overlay) {
         memset(fb->data, 0, vi.yres * fb->stride * PIXEL_SIZE);
