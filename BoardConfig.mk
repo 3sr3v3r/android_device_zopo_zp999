@@ -64,17 +64,18 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Recovery
 #RECOVERY_VARIANT := cwm
-RECOVERY_VARIANT := carliv
+#RECOVERY_VARIANT := carliv
 #RECOVERY_VARIANT := philz
 #RECOVERY_VARIANT := swipe
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
-TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/init.mt6595.rc
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
+#TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/init.mt6595.rc
+#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
 
 BOARD_HAS_MTK := true
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkmtkbootimg.mk
 
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"font40_24x48.h\"
+#BOARD_USE_CUSTOM_RECOVERY_FONT := \"font40_24x48.h\"
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 DEVICE_RESOLUTION := 1080x1920
 DEVICE_SCREEN_WIDTH := 1080
 DEVICE_SCREEN_HEIGHT := 1920
@@ -88,12 +89,12 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 TARGET_DISABLE_TRIPLE_BUFFERING := false
 #BOARD_CUSTOM_GRAPHICS := ../../../device/zopo/zp999/recovery/graphics.cwm.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/zopo/zp999/recovery/graphics.cwmt.c
+#BOARD_CUSTOM_GRAPHICS := ../../../device/zopo/zp999/recovery/graphics.cwmt.c
 
 #TWRP
-#RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/recovery.twrp.rc
-#TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.twrp.fstab
+RECOVERY_VARIANT := twrp
+TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/recovery/recovery.twrp.rc
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.twrp.fstab
 TW_BOARD_CUSTOM_GRAPHICS := ../../../device/zopo/zp999/recovery/graphics.twrp.c
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/devices/platform/battery/power_supply/battery
